@@ -2,10 +2,12 @@
 
 // check si on a bien du GET
 if(!isset($_GET) || empty($_GET)){
-  die('il faut envoyer des données post !');
+  die('il faut envoyer des données get !');
 }
 
 // ici, ajoutez le code pour require IdiORM, Paris, etc
+include('../fonctions.php');
+OuvrirBDD();
 
 // selon le verbe d'action, on require le bon fichier
 switch($_GET['action']){

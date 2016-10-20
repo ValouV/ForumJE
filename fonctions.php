@@ -1,7 +1,9 @@
 <?php
 Function Head(){
   ?>
-  <meta name="viewport" content="width=device-width, user-scalable=false;">
+  <!-- les balises meta snt dans <head> pas dans <body> -->
+  <!-- on verra ça plus atrd ^^-->
+  <!-- <meta name="viewport" content="width=device-width, user-scalable=false;"> -->
   <nav class="navbar navbar-default navbar-fixed-top navigateur" role="navigation"> <!--barre de navigation -->
             <div class="container-fluid navigateur">
                 <div class="navbar-header navigateur">
@@ -68,6 +70,9 @@ class Comt extends Model {
   public static $_table = 'com';
 }
 
+class Chat extends Model {
+  public static $_table = 'chat';
+}
 
 
 }

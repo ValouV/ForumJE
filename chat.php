@@ -6,7 +6,7 @@ Demarrer();
 <html>
 
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8"></meta>
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
             <title>Forum - Nouveau post</title>
@@ -36,7 +36,7 @@ Demarrer();
             <div class="col-md-9">
           <input id="message" type="text" class="form-control input-md" minlength="2" maxlength="30" required>
             </div>
-          <input type="hidden" name="idP" value="<?php $_SESSION['id']?>" />
+          <input type="" id="idP" value="<?php echo $_SESSION['id']?>" />
           <input type="hidden" name="action" value="creer" />
           <input id="envoi" class="btn btn-info btn-lg" role="button" value="Envoi"/>
         </form>
@@ -46,14 +46,21 @@ Demarrer();
 
       <script>
          $(function(){
+           // exécuté au chargement de la page
+           $.get('api/api.php?action=index', function(reponse){
+             // exécuté une fois qu'on a reçu les données de l'API
+             console.log(reponse);
+           });
+           // exécuté au clic
             $('#envoi').click(function(){
-      		  $.post("api/api.php",
-              	{
-      			  	      message: getElementById("message").value,
-                	idP: getElementById("idP").value,
-                		action: getElementById("action").value
-                	}
-      		  );
+              console.log('Envoi du message');
+              var message = $('#message').val();
+              var auteur_id = $('#idP').val();
+              var action = 'ajouter';
+      		      $.get("api/api.php?action=creer&message="+message+"&idP="+auteur_id, function(reponse){
+      			  	      console.log(reponse);
+                	   }
+      		        );
             });
           });
             </script>

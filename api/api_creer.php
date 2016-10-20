@@ -4,7 +4,7 @@
 include('../fonctions.php');
 OuvrirBDD();
 
-$message = chat::create();
+$message = Chat::create();
 $message -> idPOST = $_GET['idP'];
 $message -> message = strip_tags($_GET['message']);
 $message -> dateP = date("Y-m-d H:i:s");
@@ -19,6 +19,6 @@ $message -> save();
 
 // et on retourne le json de $tache !
 // NB : il faut appeler la méthode toArray de Paris, sinon ça chie
-echo json_encode($message->toArray());
+echo json_encode($message->asArray());
 // fin des bails
 die();
