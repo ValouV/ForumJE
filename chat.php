@@ -30,13 +30,16 @@ Demarrer();
 
       <h1>Chattez en illimité!</h1>
       <div class=row>
+        <div class=col-xs-12 id=anciens-mess>
+          <p id="p1"></p>
+        </div>
         <div class=col-xs-12>
         <form method="post" data-toogle="validator">
           <label class="col-md-3 control-label" for="textinput">Message</label>
             <div class="col-md-9">
           <input id="message" type="text" class="form-control input-md" minlength="2" maxlength="30" required>
             </div>
-          <input type="" id="idP" value="<?php echo $_SESSION['id']?>" />
+          <input type="hidden" id="idP" value="<?php echo $_SESSION['id']?>" />
           <input type="hidden" name="action" value="creer" />
           <input id="envoi" class="btn btn-info btn-lg" role="button" value="Envoi"/>
         </form>
@@ -49,8 +52,9 @@ Demarrer();
            // exécuté au chargement de la page
            $.get('api/api.php?action=index', function(reponse){
              // exécuté une fois qu'on a reçu les données de l'API
-             console.log(reponse);
-           });
+             affichage(reponse);
+             });
+
            // exécuté au clic
             $('#envoi').click(function(){
               console.log('Envoi du message');
@@ -58,11 +62,31 @@ Demarrer();
               var auteur_id = $('#idP').val();
               var action = 'ajouter';
       		      $.get("api/api.php?action=creer&message="+message+"&idP="+auteur_id, function(reponse){
-      			  	      console.log(reponse);
+                      $("#anciens-mess").html("");
+      			  	      affichage(reponse);
                 	   }
       		        );
             });
           });
+
+          function affichage(reponse){
+            // exécuté une fois qu'on a reçu les données de l'API
+            var obj = JSON.parse(reponse);
+
+            obj.forEach(function(entry) {
+              console.log(entry);
+              var mess=entry.idPOST+"   "+entry.message
+
+                var para = document.createElement("p");
+                var node = document.createTextNode(mess);
+                para.appendChild(node);
+                var element = document.getElementById("anciens-mess");
+                var child = document.getElementById("p1");
+                element.insertBefore(para,child);
+
+                });
+
+            }
             </script>
 
 
