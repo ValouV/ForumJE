@@ -31,7 +31,7 @@ Demarrer();
                           </div>
                           <label class="col-md-3 control-label" for="passwordinput">Mot de passe</label>
                           <div class="col-md-9">
-                            <input id="pa1" name="mdp" type="password" class="form-control input-md" minlength="6" maxlength="30" required>
+                            <input id="pa1" name="mdp" type="password" class="form-control input-md" minlength="2" maxlength="30" required>
                           </div>
                           <div class="col-md-12">
                           <input type="submit" class="btn btn-info btn-lg" role="button" value="Connexion" style="margin-top=30px;"/>

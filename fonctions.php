@@ -15,8 +15,9 @@ Function Head(){
                 </div>
                 <div class="collapse navbar-collapse " id="navigateur1">
                 <ul class="nav navbar-nav">
-                    <li class="active"> <a href="index.php">Accueil</a> </li>
+                    <li> <a href="index.php">Accueil</a> </li>
                     <li> <a href="post.php">Nouveau post</a> </li>
+                    <li> <a href="chat.php">Chat</a> </li>
                 </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -51,9 +52,9 @@ Function OuvrirBDD(){
 require_once 'assets/idiorm.php';
 require_once 'assets/paris.php';
 
-ORM::configure('mysql:host=fdb3.biz.nf;dbname=2210575_forum;charset=utf8;');
-ORM::configure('username', '2210575_forum');
-ORM::configure('password', 'azeazeaze1');
+ORM::configure('mysql:host=localhost;dbname=forum;');
+ORM::configure('username', 'root');
+ORM::configure('password', '');
 
 class User extends Model {
   public static $_table = 'membres';
@@ -66,6 +67,8 @@ class Post extends Model {
 class Comt extends Model {
   public static $_table = 'com';
 }
+
+
 
 }
 
