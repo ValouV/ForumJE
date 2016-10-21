@@ -41,7 +41,7 @@ Demarrer();
             </div>
           <input type="hidden" id="idP" value="<?php echo $_SESSION['pseudo']?>" />
           <input type="hidden" name="action" value="creer" />
-          <input id="envoi" class="btn btn-info btn-lg" role="button" value="Envoi"/>
+          <input id="envoi" class="btn btn-info btn-lg" role="button" value="Envoi" readonly/>
         </form>
         </div>
       </div>
