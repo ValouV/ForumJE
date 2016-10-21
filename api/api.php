@@ -14,9 +14,6 @@ switch($_GET['action']){
   case 'creer':
     require_once('api_creer.php');
     break;
-  case 'consulter':
-    require_once('api_consulter.php');
-    break;
   case 'index':
     require_once('api_index.php');
     break;

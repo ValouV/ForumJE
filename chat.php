@@ -50,10 +50,9 @@ Demarrer();
       <script>
          $(function(){
            // exécuté au chargement de la page
-           $.get('api/api.php?action=index', function(reponse){
-             // exécuté une fois qu'on a reçu les données de l'API
-             affichage(reponse);
-             });
+
+             affichage();
+
 
            // exécuté au clic
             $('#envoi').click(function(){
@@ -63,7 +62,7 @@ Demarrer();
               var action = 'ajouter';
       		      $.get("api/api.php?action=creer&message="+message+"&idP="+auteur, function(reponse){
                       $("#anciens-mess").html("");
-      			  	      affichage(reponse);
+      			  	      affichage();
                 	   }
       		        );
             });
@@ -73,13 +72,16 @@ Demarrer();
               var idB = this.id
               $.get("api/api.php?action=supprimer&id="+idB, function(reponse){
                     $("#anciens-mess").html("");
-                    affichage(reponse);
+                    affichage();
                    }
                 );
           });
 
-          function affichage(reponse){
+          function affichage(){
             // exécuté une fois qu'on a reçu les données de l'API
+            $.get('api/api.php?action=index', function(reponse){
+              // exécuté une fois qu'on a reçu les données de l'API
+
             var obj = JSON.parse(reponse);
 
             obj.forEach(function(entry) {
@@ -100,7 +102,7 @@ Demarrer();
                 element.insertBefore(btn,child);
                 element.insertBefore(para,btn);
                 });
-
+                });
             }
             </script>
 
