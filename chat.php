@@ -70,11 +70,21 @@ Demarrer();
 
           $('#anciens-mess').on('click','button', function () {
               var idB = this.id
+              if(idB>0){
               $.get("api/api.php?action=supprimer&id="+idB, function(reponse){
                     $("#anciens-mess").html("");
                     affichage();
                    }
                 );
+              } else {
+                var message = $('#message').val();
+                console.log(idB);
+                $.get("api/api.php?action=modifier&message="+message+"&id="+(-idB), function(reponse){
+                      $("#anciens-mess").html("");
+      			  	      affichage();
+                	   }
+      		        );
+              }
           });
 
           function affichage(){
@@ -99,8 +109,14 @@ Demarrer();
                 btn.setAttribute("id", entry.id);
                 btn.appendChild(t);
 
+                var btnM = document.createElement("BUTTON");        // Create a <button> element
+                var m = document.createTextNode("Modifier");       // Create a text node
+                btnM.setAttribute("id", -(entry.id));
+                btnM.appendChild(m);
+
                 element.insertBefore(btn,child);
-                element.insertBefore(para,btn);
+                element.insertBefore(btnM,btn);
+                element.insertBefore(para,btnM);
                 });
                 });
             }
