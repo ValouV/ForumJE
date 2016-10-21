@@ -39,7 +39,7 @@ Demarrer();
             <div class="col-md-9">
           <input id="message" type="text" class="form-control input-md" minlength="2" maxlength="30" required>
             </div>
-          <input type="hidden" id="idP" value="<?php echo $_SESSION['id']?>" />
+          <input type="hidden" id="idP" value="<?php echo $_SESSION['pseudo']?>" />
           <input type="hidden" name="action" value="creer" />
           <input id="envoi" class="btn btn-info btn-lg" role="button" value="Envoi"/>
         </form>
@@ -59,14 +59,23 @@ Demarrer();
             $('#envoi').click(function(){
               console.log('Envoi du message');
               var message = $('#message').val();
-              var auteur_id = $('#idP').val();
+              var auteur = $('#idP').val();
               var action = 'ajouter';
-      		      $.get("api/api.php?action=creer&message="+message+"&idP="+auteur_id, function(reponse){
+      		      $.get("api/api.php?action=creer&message="+message+"&idP="+auteur, function(reponse){
                       $("#anciens-mess").html("");
       			  	      affichage(reponse);
                 	   }
       		        );
             });
+          });
+
+          $('#anciens-mess').on('click','button', function () {
+              var idB = this.id
+              $.get("api/api.php?action=supprimer&id="+idB, function(reponse){
+                    $("#anciens-mess").html("");
+                    affichage(reponse);
+                   }
+                );
           });
 
           function affichage(reponse){
@@ -75,15 +84,21 @@ Demarrer();
 
             obj.forEach(function(entry) {
               console.log(entry);
-              var mess=entry.idPOST+"   "+entry.message
+              var mess=entry.pseudo+"   "+entry.message
 
                 var para = document.createElement("p");
                 var node = document.createTextNode(mess);
                 para.appendChild(node);
                 var element = document.getElementById("anciens-mess");
                 var child = document.getElementById("p1");
-                element.insertBefore(para,child);
 
+                var btn = document.createElement("BUTTON");        // Create a <button> element
+                var t = document.createTextNode("Supprimer");       // Create a text node
+                btn.setAttribute("id", entry.id);
+                btn.appendChild(t);
+
+                element.insertBefore(btn,child);
+                element.insertBefore(para,btn);
                 });
 
             }
